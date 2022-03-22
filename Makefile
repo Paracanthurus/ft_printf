@@ -6,7 +6,7 @@
 #    By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/07 16:16:37 by aokubo            #+#    #+#              #
-#    Updated: 2022/03/23 03:45:49 by aokubo           ###   ########.fr        #
+#    Updated: 2022/03/23 04:12:46 by aokubo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ LIBFT	= $(L_DIR)/libft.a
 AR		= ar rcs
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
-#INCLUDE	= -I. -I$(B_DIR) -I$(L_DIR)
 
 $(NAME):	$(OBJS)
 			make bonus -C $(L_DIR)

@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:27:27 by aokubo            #+#    #+#             */
-/*   Updated: 2022/02/05 20:32:44 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/03/23 04:01:55 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
+	va_list	args_cpy;
 	int		len;
 
 	va_start(args, format);
-	len = ft_printf_len(format, args);
+	va_copy(args_cpy, args);
+	len = ft_printf_len(format, &args_cpy);
 	if (len != -1)
 	{
 		while (*format != '\0')
@@ -39,7 +41,7 @@ int	ft_printf(const char *format, ...)
 	return (len);
 }
 
-int	ft_printf_len(const char *s, va_list args)
+int	ft_printf_len(const char *s, va_list *args)
 {
 	ssize_t	len;
 
@@ -49,7 +51,7 @@ int	ft_printf_len(const char *s, va_list args)
 		if (*s == '%')
 		{
 			s++;
-			len += ft_format(&s, &args, 0);
+			len += ft_format(&s, args, 0);
 		}
 		else
 		{
@@ -62,6 +64,6 @@ int	ft_printf_len(const char *s, va_list args)
 			break ;
 		}
 	}
-	va_end(args);
+	va_end(*args);
 	return (len);
 }

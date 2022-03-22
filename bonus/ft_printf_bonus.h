@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:29:51 by aokubo            #+#    #+#             */
-/*   Updated: 2022/02/05 20:32:30 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/03/23 03:44:56 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include<stdarg.h>
 # include<unistd.h>
 # include<limits.h>
-# include"libft.h"
+# include"../libft/libft.h"
 
 typedef struct s_format
 {

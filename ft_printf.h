@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:29:51 by aokubo            #+#    #+#             */
-/*   Updated: 2022/01/30 20:56:49 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/03/23 03:46:05 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include<stdarg.h>
 # include<unistd.h>
-# include"libft.h"
+# include"libft/libft.h"
 
 int		ft_printf(const char *format, ...);
 int		ft_format(const char **s, va_list *args);

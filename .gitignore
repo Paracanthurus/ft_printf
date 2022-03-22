@@ -1,0 +1,5 @@
+*.pdf
+printfTester/
+main.c
+*.o
+*.a

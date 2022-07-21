@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 18:20:30 by aokubo            #+#    #+#             */
-/*   Updated: 2022/03/01 16:29:03 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/07/21 21:38:00 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,55 +34,40 @@ void	ft_width(const char **s, t_format *format, va_list *args)
 	if (**s == '*')
 	{
 		format->width = va_arg(*args, int);
-		if (format->width < 0)
-		{
-			format->width *= -1;
-			format->flag |= (1 << 0);
-		}
 		(*s)++;
 	}
 	else if (ft_isdigit(**s) && **s != '0')
 	{
-		format->width = 0;
+		format->width = ft_atoi(*s);
 		while (ft_isdigit(**s))
-		{
-			format->width *= 10;
-			format->width += **s - '0';
 			(*s)++;
-		}
-		if (format->width < 0)
-		{
-			format->width *= -1;
-			format->flag |= (1 << 0);
-		}
+	}
+	if (format->width < 0)
+	{
+		format->width *= -1;
+		format->flag |= (1 << 0);
 	}
 }
 
 void	ft_precision(const char **s, t_format *format, va_list *args)
 {
-	if (**s == '.')
+	if (**s != '.')
+		return ;
+	format->precision = 0;
+	(*s)++;
+	if (**s == '*')
 	{
-		format->precision = 0;
+		format->precision = va_arg(*args, int);
 		(*s)++;
-		if (**s == '*')
-		{
-			format->precision = va_arg(*args, int);
-			if (format->precision < 0)
-				format->precision = -1;
-			(*s)++;
-		}
-		else
-		{
-			while (ft_isdigit(**s))
-			{
-				format->precision *= 10;
-				format->precision += **s - '0';
-				(*s)++;
-			}
-			if (format->precision < 0)
-				format->precision = -1;
-		}
 	}
+	else
+	{
+		format->precision = ft_atoi(*s);
+		while (ft_isdigit(**s))
+			(*s)++;
+	}
+	if (format->precision < 0)
+		format->precision = -1;
 }
 
 void	ft_type(const char **s, t_format *format)

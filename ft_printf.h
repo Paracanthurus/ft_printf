@@ -5,28 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 16:29:51 by aokubo            #+#    #+#             */
-/*   Updated: 2022/03/23 03:46:05 by aokubo           ###   ########.fr       */
+/*   Created: 2022/07/30 20:11:01 by aokubo            #+#    #+#             */
+/*   Updated: 2022/07/31 06:23:49 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include<stdarg.h>
 # include<unistd.h>
+# include<stdarg.h>
+# include<stdlib.h>
+# include<limits.h>
 # include"libft/libft.h"
 
-int		ft_printf(const char *format, ...);
-int		ft_format(const char **s, va_list *args);
-char	ft_type(const char **s);
-int		ft_print_d(int n);
-int		ft_print_u(unsigned int n);
-int		ft_print_x(unsigned int n);
-int		ft_numlen_x(unsigned int n);
-int		ft_print_large_x(unsigned int n);
-int		ft_print_p(uintptr_t n);
-int		ft_print_c(char c);
-int		ft_print_s(char *s);
+# define SUCCESS 1
+# define FAILURE 0
+typedef struct s_format
+{
+	int		minus;
+	int		plus;
+	int		space;
+	int		sharp;
+	int		zero;
+	long	width;
+	long	precision;
+	char	type;
+	ssize_t	len;
+}	t_format;
+
+int	ft_printf(const char *format, ...);
 
 #endif

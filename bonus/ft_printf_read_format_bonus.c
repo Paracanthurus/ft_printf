@@ -6,13 +6,13 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 18:20:30 by aokubo            #+#    #+#             */
-/*   Updated: 2022/07/21 21:38:00 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/07/31 00:22:23 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf_bonus.h"
 
-void	ft_frag(const char **s, t_format *format)
+void	ft_readflag(const char **s, t_format *format)
 {
 	if (**s == '-')
 		format->flag |= (1 << 0);
@@ -29,7 +29,7 @@ void	ft_frag(const char **s, t_format *format)
 	(*s)++;
 }
 
-void	ft_width(const char **s, t_format *format, va_list *args)
+void	ft_readwidth(const char **s, t_format *format, va_list *args)
 {
 	if (**s == '*')
 	{
@@ -49,7 +49,7 @@ void	ft_width(const char **s, t_format *format, va_list *args)
 	}
 }
 
-void	ft_precision(const char **s, t_format *format, va_list *args)
+void	ft_readprecision(const char **s, t_format *format, va_list *args)
 {
 	if (**s != '.')
 		return ;
@@ -70,9 +70,14 @@ void	ft_precision(const char **s, t_format *format, va_list *args)
 		format->precision = -1;
 }
 
-void	ft_type(const char **s, t_format *format)
+void	ft_readtype(const char **s, t_format *format)
 {
 	if (ft_istype(**s))
+	{
+		format->type = **s;
+		(*s)++;
+	}
+	else if (ft_isformat(**s))
 	{
 		format->type = **s;
 		(*s)++;

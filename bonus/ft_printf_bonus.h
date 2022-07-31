@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 16:29:51 by aokubo            #+#    #+#             */
-/*   Updated: 2022/07/21 22:01:10 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/07/31 00:22:33 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,26 @@
 typedef struct s_format
 {
 	int		flag;
+	int		minus;
+	int		plus;
+	int		space;
+	int		sharp;
+	int		zero;
 	long	width;
 	long	precision;
 	char	type;
 	int		print;
+	size_t	len;
 }	t_format;
 
 int		ft_printf(const char *format, ...);
 size_t	ft_format(const char **s, va_list *args, int print);
 int		ft_istype(char c);
-void	ft_frag(const char **s, t_format *format);
-void	ft_width(const char **s, t_format *format, va_list *args);
-void	ft_precision(const char **s, t_format *format, va_list *args);
-void	ft_type(const char **s, t_format *format);
+int	ft_isformat(char c);
+void	ft_readflag(const char **s, t_format *format);
+void	ft_readwidth(const char **s, t_format *format, va_list *args);
+void	ft_readprecision(const char **s, t_format *format, va_list *args);
+void	ft_readtype(const char **s, t_format *format);
 size_t	ft_print_d(int n, t_format format);
 size_t	ft_print_u(unsigned int n, t_format format);
 size_t	ft_print_x(unsigned int n, t_format f);

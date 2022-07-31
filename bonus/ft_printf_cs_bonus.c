@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 18:52:56 by aokubo            #+#    #+#             */
-/*   Updated: 2022/01/30 20:03:04 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/07/30 19:51:29 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ size_t	ft_print_c(char c, t_format format)
 	size_t	len;
 
 	len = 1;
-	if (format.flag & (1 << 0))
-	{
-		if (format.print)
-			ft_putchar_fd(c, 1);
-	}
+	if (format.minus)
+		ft_putchar_fd(c, 1);
 	len = ft_put_field_cs(format, len);
 	if (!(format.flag & (1 << 0)))
 	{

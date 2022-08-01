@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 20:11:01 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 22:43:10 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/08/01 22:54:46 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define SUCCESS 1
 # define FAILURE 0
+
 typedef struct s_format
 {
 	int		minus;

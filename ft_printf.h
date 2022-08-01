@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 20:11:01 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 22:54:46 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/08/02 05:54:26 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_format
 	int		space;
 	int		sharp;
 	int		zero;
-	long	width;
-	long	precision;
+	int		width;
+	int		precision;
 	char	type;
 	int		x_large;
 	size_t	len;

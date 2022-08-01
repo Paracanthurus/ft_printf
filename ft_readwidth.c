@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 18:52:42 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/08/02 06:02:05 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	ft_readwidth(char **s, t_format *format, va_list *args)
 	}
 	if (format->width < 0)
 	{
-		format->width *= -1;
+		if (format->width == INT_MIN)
+			format->width = INT_MAX;
+		else
+			format->width *= -1;
 		format->minus = 1;
 	}
 }

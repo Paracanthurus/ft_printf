@@ -3,3 +3,4 @@ printfTester/
 main.c
 *.o
 *.a
+a.out

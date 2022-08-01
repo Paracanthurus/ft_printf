@@ -6,7 +6,7 @@
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/30 20:11:01 by aokubo            #+#    #+#             */
-/*   Updated: 2022/07/31 06:23:49 by aokubo           ###   ########.fr       */
+/*   Updated: 2022/08/01 14:13:12 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_format
 	long	width;
 	long	precision;
 	char	type;
+	int		x_large;
 	ssize_t	len;
 }	t_format;
 

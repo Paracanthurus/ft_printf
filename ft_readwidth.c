@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_readwidth.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 18:52:42 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_readwidth(char **s, t_format *format, va_list *args)
 {
-	va_list		args;
-	int			len;
-
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	if (**s == '*')
+	{
+		format->width = va_arg(*args, int);
+		(*s)++;
+	}
+	else if (ft_isdigit(**s) && **s != '0')
+	{
+		format->width = ft_atoi(*s);
+		while (ft_isdigit(**s))
+			(*s)++;
+	}
+	if (format->width < 0)
+	{
+		format->width *= -1;
+		format->minus = 1;
+	}
 }

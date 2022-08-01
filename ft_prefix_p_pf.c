@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_prefix_p_pf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 19:10:44 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_prefix_p_pf(char *str, uintptr_t p, size_t len, t_format *format)
 {
-	va_list		args;
-	int			len;
+	size_t	numlen;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	numlen = ft_numlen_p(p, format);
+	if (format->minus || format->zero)
+		ft_memmove(&str[0], "0x", 2);
+	else
+		ft_memmove(&str[len - numlen], "0x", 2);
 }

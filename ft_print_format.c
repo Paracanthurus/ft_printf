@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_format.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 19:14:07 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:25:08 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_format(char **s, va_list *args, t_format *format)
 {
-	va_list		args;
-	int			len;
-
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	(*s)++;
+	ft_readformat(s, args, format);
+	if (format->type == 0)
+		return (0);
+	return (ft_devide_type(args, format));
 }

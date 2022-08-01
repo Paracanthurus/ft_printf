@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_c.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 18:57:52 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 22:40:36 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_c(char c, t_format *format)
 {
-	va_list		args;
-	int			len;
+	int		res;
+	size_t	len;
+	char	*str;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	len = ft_max_size_t(1, format->width);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (-1);
+	ft_makestr_c(str, c, len, format);
+	if (len >= (size_t)INT_MAX || format->len + len >= (size_t)INT_MAX)
+	{
+		ft_safe_free((void **)&str);
+		return (-1);
+	}
+	res = write(1, str, len);
+	ft_safe_free((void **)&str);
+	return (res);
 }

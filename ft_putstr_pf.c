@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_pf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 18:50:29 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:52:12 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_putstr_pf(char *str, t_format *format)
 {
-	va_list		args;
-	int			len;
+	size_t	len;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	if (str == NULL)
+		return (-1);
+	len = ft_strlen(str);
+	if (len >= (size_t)INT_MAX || format->len + len >= (size_t)INT_MAX)
+		return (-1);
+	return (write(1, str, len));
 }

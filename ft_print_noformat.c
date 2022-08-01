@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_noformat.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 19:15:16 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_noformat(char **str, t_format *format)
 {
-	va_list		args;
-	int			len;
+	int		res;
+	size_t	len;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	len = ft_strlen_char(*str, '%');
+	if (len >= (size_t)INT_MAX || format->len + len >= (size_t)INT_MAX)
+		return (-1);
+	res = write(1, *str, len);
+	*str += len;
+	return (res);
 }

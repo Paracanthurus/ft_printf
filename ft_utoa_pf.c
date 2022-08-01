@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_utoa_pf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 19:03:26 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_utoa_pf(char *str, unsigned int u, size_t numlen)
 {
-	va_list		args;
-	int			len;
+	char	*s;
+	size_t	len_s;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	s = ft_utoa(u);
+	if (s == NULL)
+		return (FAILURE);
+	len_s = ft_strlen(s);
+	if (u == 0)
+		len_s = 0;
+	ft_memset(&str[0], '0', numlen);
+	ft_memmove(&str[numlen - len_s], s, len_s);
+	ft_safe_free((void **)&s);
+	return (SUCCESS);
 }

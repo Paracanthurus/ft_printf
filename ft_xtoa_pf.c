@@ -1,24 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_xtoa_pf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 19:07:46 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_xtoa_pf(char *str, unsigned int x, size_t numlen, t_format *format)
 {
-	va_list		args;
-	int			len;
+	char	*s;
+	size_t	len_s;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	s = ft_xtoa(x, format->x_large);
+	if (s == NULL)
+		return (FAILURE);
+	len_s = ft_strlen(s);
+	if (x == 0)
+		len_s = 0;
+	if (format->sharp && x != 0)
+	{
+		numlen -= 2;
+		str += 2;
+	}
+	ft_memset(&str[0], '0', numlen - len_s);
+	ft_memmove(&str[numlen - len_s], s, len_s);
+	ft_safe_free((void **)&s);
+	return (SUCCESS);
 }

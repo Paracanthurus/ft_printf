@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_readprecision.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 18:53:17 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+void	ft_readprecision(char **s, t_format *format, va_list *args)
 {
-	va_list		args;
-	int			len;
-
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
-	return (len);
+	if (**s != '.')
+		return ;
+	format->precision = 0;
+	(*s)++;
+	if (**s == '*')
+	{
+		format->precision = va_arg(*args, int);
+		(*s)++;
+		if (format->precision < 0)
+			format->precision = -1;
+	}
+	else if (ft_isdigit(**s))
+	{
+		format->precision = ft_atoi(*s);
+		while (ft_isdigit(**s))
+			(*s)++;
+	}
 }

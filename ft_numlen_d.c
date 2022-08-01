@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_numlen_d.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokubo <aokubo@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/30 20:09:44 by aokubo            #+#    #+#             */
-/*   Updated: 2022/08/01 19:17:45 by aokubo           ###   ########.fr       */
+/*   Created: 2022/08/01 18:58:28 by aokubo            #+#    #+#             */
+/*   Updated: 2022/08/01 19:29:17 by aokubo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+size_t	ft_numlen_d(int d, t_format *format)
 {
-	va_list		args;
-	int			len;
+	size_t	len;
+	int		num;
 
-	va_start(args, format);
-	len = ft_print_main((char *)format, &args);
-	va_end(args);
+	len = 0;
+	num = d;
+	while (d != 0)
+	{
+		d /= 10;
+		len++;
+	}
+	if (format->precision != -1)
+		len = ft_max_size_t(len, format->precision);
+	else if (num == 0)
+		len = 1;
+	if (num < 0 || format->space || format->plus)
+		len++;
 	return (len);
 }
